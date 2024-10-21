@@ -1,0 +1,64 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users List</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+    <h1>Users List</h1>
+    <table id="usersTable">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Email</th>
+                <!-- Add other user fields as necessary -->
+            </tr>
+        </thead>
+        <tbody>
+            <!-- User rows will be inserted here -->
+        </tbody>
+    </table>
+    <script>
+        async function fetchUsers() {
+            try {
+                const response = await fetch('/auth/users');
+                const users = await response.json();
+                const tableBody = document.querySelector('#usersTable tbody');
+                tableBody.innerHTML = ''; // Clear existing rows
+
+                users.forEach(user => {
+                    const row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${user.id}</td>
+                        <td>${user.username}</td>
+                        <td>${user.email}</td>
+                        <!-- Add other user fields as necessary -->
+                    `;
+                    tableBody.appendChild(row);
+                });
+            } catch (error) {
+                console.error('Error fetching users:', error);
+            }
+        }
+
+        // Call fetchUsers on page load
+        window.onload = fetchUsers;
+    </script>
+</body>
+</html>

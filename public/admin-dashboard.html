@@ -1,0 +1,26 @@
+<!-- In your HTML file -->
+<button onclick="window.location.href='/users.html'">Display Users</button>
+<button onclick="window.location.href='/delete.html'">Delete Users</button>
+<button onclick="findUser()">Find User by ID</button>
+
+<script>
+    function findUser() {
+        const userId = prompt('Enter user ID:');
+        if (userId) {
+            fetch(`/auth/findUser/${userId}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        alert(data.error);
+                    } else {
+                        // Assuming the user data contains name and email fields
+                        alert(`User ID: ${data.id}\nName: ${data.username}\nEmail: ${data.email}`);
+                    }
+                })
+                .catch(error => {
+                    console.error('Error fetching user:', error);
+                    alert('Failed to fetch user data');
+                });
+        }
+    }
+</script>

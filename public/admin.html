@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Login</title>
+</head>
+<body>
+    <h2>Admin Login</h2>
+    <form >
+        <input type="text" id="adminUsername" placeholder="Username" required><br>
+        <input type="password" id="adminPassword" placeholder="Password" required><br>
+        <button type="button" onclick="dis()">Login as Admin</button>
+    </form>
+
+    <script>
+        function dis() {
+            // Sample credentials for authentication
+            const adminUsername = "admin";
+            const adminPassword = "pass1";
+        
+            // Get the values entered by the user
+            const enteredUsername = document.getElementById("adminUsername").value;
+            const enteredPassword = document.getElementById("adminPassword").value;
+        
+            // Check if the entered credentials match the predefined admin credentials
+            if (enteredUsername === adminUsername && enteredPassword === adminPassword) {
+                // If credentials are correct, redirect to dashboard.html
+                window.location.href = "admin-dashboard.html";
+            } else {
+                // If credentials are incorrect, show an error message
+                alert("Incorrect username or password. Please try again.");
+            }
+        }
+        </script>
+        
+</body>
+</html>
+
+
+
